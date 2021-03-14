@@ -2,9 +2,8 @@ package com.example.demo.service;
 
 import com.example.demo.entity.Item;
 
-import java.util.List;
-
 public interface IItemService {
-    List<Item> parseItemsFromFile();
+    boolean parseItemsFromFile();
+
     void save(Item item);
 }

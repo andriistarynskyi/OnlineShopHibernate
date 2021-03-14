@@ -8,7 +8,7 @@ import com.example.demo.utils.FileReader;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
+import javax.transaction.Transactional;
 import java.util.List;
 
 @Service
@@ -18,13 +18,14 @@ public class ItemService implements IItemService {
     ItemRepository itemRepository;
 
     @Override
+    @Transactional
     public void save(Item item) {
         itemRepository.save(item);
     }
 
     @Override
-    public List<Item> parseItemsFromFile() {
-        List<Item> items = new ArrayList<>();
+    @Transactional
+    public boolean parseItemsFromFile() {
         List<String> itemsDataList = FileReader.read(Constant.ITEMS_FILE_PATH);
 
         for (String str : itemsDataList) {
@@ -34,8 +35,9 @@ public class ItemService implements IItemService {
             item.setCode(Integer.parseInt(tempArray[2]));
             item.setProducer(tempArray[3]);
             item.setDateOfLastUpdate(DateParser.parse(tempArray[4], Constant.DATE_OF_LAST_UPDATE_PATTERN));
-            items.add(item);
+            save(item);
         }
-        return items;
+        System.out.println("Items from file were added to DB");
+        return true;
     }
 }
