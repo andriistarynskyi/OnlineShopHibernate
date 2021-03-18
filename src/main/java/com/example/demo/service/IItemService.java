@@ -6,4 +6,6 @@ public interface IItemService {
     boolean parseItemsFromFile();
 
     void save(Item item);
+
+//    boolean updatePrimaryItem(String title,String producer);
 }

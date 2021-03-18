@@ -13,6 +13,18 @@ public class ItemRepository implements IItemRepository {
 
     @Override
     public void save(Item item) {
-        em.persist(item);
+        if(item.getId() == 0) {
+            em.persist(item);
+        } else {
+            em.merge(item);
+        }
+    }
+
+    @Override
+    public boolean update(Item itemToUpdate) {
+        if (itemToUpdate != null) {
+            return true;
+        }
+        return false;
     }
 }
