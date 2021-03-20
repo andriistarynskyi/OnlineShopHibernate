@@ -41,16 +41,8 @@ public class ItemService implements IItemService {
         return true;
     }
 
-//    to do: add findById method to relevant repository and service
-
-//    @Override
-//    @Transactional (no need to create relevant methods at repository level
-//    public boolean updatePrimaryItem() {
-//        Item itemToUpdate = itemRepository.findById(Int id);
-//        if(itemToUpdate != null) {
-//            itemToUpdate.setPrimaryItem(true);
-//            return itemRepository.update(itemToUpdate);
-//        }
-//        return false;
-//    }
+    @Override
+    public Item findById(int id) {
+        return itemRepository.findById(id);
+    }
 }

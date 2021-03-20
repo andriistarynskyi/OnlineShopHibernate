@@ -7,5 +7,5 @@ public interface IItemService {
 
     void save(Item item);
 
-//    boolean updatePrimaryItem(String title,String producer);
+    Item findById(int id);
 }

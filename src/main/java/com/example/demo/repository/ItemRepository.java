@@ -13,11 +13,16 @@ public class ItemRepository implements IItemRepository {
 
     @Override
     public void save(Item item) {
-        if(item.getId() == 0) {
+        if (item.getId() == 0) {
             em.persist(item);
         } else {
             em.merge(item);
         }
+    }
+
+    @Override
+    public Item findById(int id) {
+        return em.find(Item.class, id);
     }
 
     @Override

@@ -6,4 +6,6 @@ public interface IItemRepository {
     void save(Item item);
 
     boolean update(Item itemToUpdate);
+
+    Item findById(int id);
 }
