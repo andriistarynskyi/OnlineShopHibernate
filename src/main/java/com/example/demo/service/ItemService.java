@@ -45,4 +45,27 @@ public class ItemService implements IItemService {
     public Item findById(int id) {
         return itemRepository.findById(id);
     }
+
+    @Override
+    @Transactional
+    public boolean updatePrimaryItem(Item item) {
+        if (item != null) {
+            item.setPrimaryItem(true);
+            item.setCandidateToRemove(false);
+            return true;
+        }
+        return false;
+    }
+
+    @Override
+    @Transactional
+    public boolean updateCandidateToRemove(Item item) {
+        if (item != null) {
+            item.setCandidateToRemove(true);
+            item.setPrimaryItem(false);
+            return true;
+        }
+
+        return false;
+    }
 }

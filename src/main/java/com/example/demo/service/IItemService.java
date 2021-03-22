@@ -10,4 +10,8 @@ public interface IItemService {
     void save(Item item);
 
     Item findById(int id);
+
+    boolean updatePrimaryItem(Item item);
+
+    boolean updateCandidateToRemove(Item item);
 }

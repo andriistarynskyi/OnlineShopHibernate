@@ -14,7 +14,25 @@ public class Application {
 
         IDataFromFileSaverService dataFromFileSaverService = ctx.getBean(IDataFromFileSaverService.class);
         IReportService reportService = ctx.getBean(IReportService.class);
+
         List<Payment> payments = reportService.findAll();
-        payments.forEach(p -> System.out.println(p.getItems()));
+
+//        get all purchased items by women sorted by number of sales
+        reportService.getItemsPurchasedByWomen(payments).forEach(i -> System.out.println(i));
+
+        System.out.println("--------------------");
+
+//        save top three best selling items to file
+        System.out.println(reportService.saveBestSellersToFile(payments));
+
+//        save three candidates to remove to file
+        System.out.println(reportService.saveCandidatesToRemoveToFile(payments));
+
+//        get top three bestselling items
+        reportService.getBestSellers(payments).forEach(i -> System.out.println(i));
+
+        System.out.println("--------------------");
+//        get three items - candidates to remove
+        reportService.getCandidatesToRemove(payments).forEach(i -> System.out.println(i));
     }
 }

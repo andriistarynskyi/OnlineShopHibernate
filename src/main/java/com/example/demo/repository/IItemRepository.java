@@ -8,4 +8,6 @@ public interface IItemRepository {
     boolean update(Item itemToUpdate);
 
     Item findById(int id);
+
+    boolean updateItem(Item item);
 }

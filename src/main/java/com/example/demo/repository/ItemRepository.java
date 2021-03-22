@@ -26,6 +26,14 @@ public class ItemRepository implements IItemRepository {
     }
 
     @Override
+    public boolean updateItem(Item item) {
+        if (item != null) {
+            return true;
+        }
+        return false;
+    }
+
+    @Override
     public boolean update(Item itemToUpdate) {
         if (itemToUpdate != null) {
             return true;
