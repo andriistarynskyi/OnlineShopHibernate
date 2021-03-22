@@ -9,13 +9,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
 public class ItemService implements IItemService {
 
     @Autowired
-    ItemRepository itemRepository;
+    private ItemRepository itemRepository;
 
     @Override
     @Transactional
@@ -24,9 +25,9 @@ public class ItemService implements IItemService {
     }
 
     @Override
-    @Transactional
-    public boolean parseItemsFromFile() {
+    public List<Item> parseItemsFromFile() {
         List<String> itemsDataList = FileReader.read(Constant.ITEMS_FILE_PATH);
+        List<Item> items = new ArrayList<>();
 
         for (String str : itemsDataList) {
             String[] tempArray = str.split(";");
@@ -35,10 +36,9 @@ public class ItemService implements IItemService {
             item.setCode(Integer.parseInt(tempArray[2]));
             item.setProducer(tempArray[3]);
             item.setDateOfLastUpdate(DateParser.parse(tempArray[4], Constant.DATE_OF_LAST_UPDATE_PATTERN));
-            save(item);
+            items.add(item);
         }
-        System.out.println("Items from file were added to DB");
-        return true;
+        return items;
     }
 
     @Override

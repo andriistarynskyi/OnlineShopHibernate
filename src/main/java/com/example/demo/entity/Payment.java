@@ -2,25 +2,23 @@ package com.example.demo.entity;
 
 import javax.persistence.*;
 import java.time.LocalDate;
-import java.util.Collection;
+import java.util.List;
 import java.util.Objects;
 
 @Entity
-@Table(name = "payment")
 public class Payment {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "payment_id")
     private int id;
     private LocalDate orderPlacementDate;
-    @ManyToOne (fetch = FetchType.EAGER)
+    @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "customer_id")
     private Customer customer;
-    @ManyToMany(cascade = {CascadeType.PERSIST})
+    @ManyToMany(cascade = {CascadeType.PERSIST}, fetch = FetchType.EAGER)
     @JoinTable(name = "ordered_items",
             joinColumns = @JoinColumn(name = "payment_id"),
             inverseJoinColumns = @JoinColumn(name = "item_id"))
-    private Collection<Item> items;
+    private List<Item> items;
 
 
     public Payment() {
@@ -50,11 +48,11 @@ public class Payment {
         this.customer = customer;
     }
 
-    public Collection<Item> getItems() {
+    public List<Item> getItems() {
         return items;
     }
 
-    public void setItems(Collection<Item> items) {
+    public void setItems(List<Item> items) {
         this.items = items;
     }
 
@@ -63,8 +61,6 @@ public class Payment {
         return "Payment{" +
                 "id=" + id +
                 ", orderPlacementDate=" + orderPlacementDate +
-                ", customer=" + customer +
-                ", items=" + items +
                 '}';
     }
 

@@ -6,5 +6,7 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface ICustomerRepository {
     void save(Customer customer);
+
+    Customer findByName(String customerName);
 }
 
