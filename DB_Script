@@ -42,12 +42,3 @@ create table ordered_items
     constraint ordered_items_ibfk_2
         foreign key (item_id) references item (item_id)
 );
-
-create index item_id_fk
-    on ordered_items (item_id);
-
-create index payment_id_fk
-    on ordered_items (payment_id);
-
-create index customer_id_fk
-    on payment (customer_id);
