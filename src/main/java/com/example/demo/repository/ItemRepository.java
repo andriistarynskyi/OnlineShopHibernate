@@ -32,12 +32,4 @@ public class ItemRepository implements IItemRepository {
         }
         return false;
     }
-
-    @Override
-    public boolean update(Item itemToUpdate) {
-        if (itemToUpdate != null) {
-            return true;
-        }
-        return false;
-    }
 }

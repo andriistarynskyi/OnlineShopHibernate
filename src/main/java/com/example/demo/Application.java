@@ -15,6 +15,8 @@ public class Application {
         IDataFromFileSaverService dataFromFileSaverService = ctx.getBean(IDataFromFileSaverService.class);
         IReportService reportService = ctx.getBean(IReportService.class);
 
+        dataFromFileSaverService.save();
+
         List<Payment> payments = reportService.findAll();
 
 //        get all purchased items by women sorted by number of sales
